@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// ✅ Full services data
 const servicesData = [
   {
     title: 'Heart Health Checkups',
@@ -61,7 +60,6 @@ const servicesData = [
   }
 ];
 
-// ✅ Framer Motion variants
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
   animate: { opacity: 1, y: 0 },
@@ -85,7 +83,6 @@ function Services() {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6 }}
     >
-      {/* ✅ Galaxy Star Animation */}
       <div className="stars">
         {Array.from({ length: 60 }).map((_, i) => (
           <div key={`star-${i}`} className="star"

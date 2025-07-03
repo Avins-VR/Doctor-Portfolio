@@ -61,7 +61,6 @@ function Home() {
         </motion.ul>
       </motion.nav>
 
-      {/* Hero Section */}
       <div className="hero-section">
         <motion.div 
           className="hero-content"

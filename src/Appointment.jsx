@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// Animation variants
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0 },
@@ -25,8 +24,6 @@ function Appointment() {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6 }}
     >
-
-      {/* ✅ Galaxy Star Animation */}
       <div className="stars">
         {Array.from({ length: 60 }).map((_, i) => (
           <div 

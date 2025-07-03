@@ -90,9 +90,7 @@ function About() {
       </motion.p>
 
       <div className="about-columns">
-        {/* === LEFT COLUMN === */}
         <div className="left-column">
-          {/* Doctor Card */}
           <motion.div
             className="box journey-box"
             variants={fadeInLeft}
@@ -107,7 +105,6 @@ function About() {
             </p>
           </motion.div>
 
-          {/* Expertise Card */}
           <motion.div
             className="box expertise-box"
             variants={fadeInLeft}
@@ -135,7 +132,6 @@ function About() {
           </motion.div>
         </div>
 
-        {/* === RIGHT COLUMN === */}
         <motion.div
           className="box stats-box"
           variants={scaleIn}
