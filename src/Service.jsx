@@ -1,5 +1,7 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
+// ✅ Full services data
 const servicesData = [
   {
     title: 'Heart Health Checkups',
@@ -33,7 +35,7 @@ const servicesData = [
     title: 'Lifestyle Counselling & Rehab',
     description: 'Guidance and programs to promote long-term heart health and recovery.'
   },
-   {
+  {
     title: 'Arrhythmia Treatment',
     description: 'Diagnosis and treatment plans for irregular heartbeats, including medication and procedures.'
   },
@@ -59,24 +61,107 @@ const servicesData = [
   }
 ];
 
+// ✅ Framer Motion variants
+const fadeInUp = {
+  initial: { opacity: 0, y: 40 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, ease: 'easeOut' }
+};
+
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+};
+
 function Services() {
   return (
-    <section className="services-section">
-      <div className="container">
-        <h2 className="section-title" id="service">Services Offered</h2>
-        <p className="section-subtitle">
-          Comprehensive cardiac care tailored to your heart health needs.
-        </p>
-        <div className="services-grid">
+    <motion.section 
+      className="services-section"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6 }}
+    >
+      {/* ✅ Galaxy Star Animation */}
+      <div className="stars">
+        {Array.from({ length: 60 }).map((_, i) => (
+          <div key={`star-${i}`} className="star"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${2 + Math.random() * 5}s`
+            }}
+          ></div>
+        ))}
+      {Array.from({ length: 20}).map((_, i) => (
+      <div key={`heart-${i}`} className="shape heart"
+        style={{
+          top: `${Math.random() * 100}%`,
+          left: `${Math.random() * 100}%`,
+          animationDelay: `${Math.random() * 2}s`,
+          animationDuration: `${5 + Math.random() * 5}s`
+        }}
+      ></div>
+    ))}
+
+    {Array.from({ length: 20}).map((_, i) => (
+      <div key={`hex-${i}`} className="shape hexagon"
+        style={{
+          top: `${Math.random() * 100}%`,
+          left: `${Math.random() * 100}%`,
+          animationDelay: `${Math.random() * 2}s`,
+          animationDuration: `${5 + Math.random() * 5}s`
+        }}
+      ></div>
+    ))}
+</div>
+  <div className="container">
+        <motion.h2 
+          className="section-title" 
+          id="services"
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          Services Offered
+        </motion.h2>
+
+        <motion.p 
+          className="section-subtitle"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Comprehensive cardiac care tailored to your unique heart health needs with advanced diagnosis, effective treatment, and personalized lifestyle guidance for lasting well-being.
+        </motion.p>
+
+        <motion.div 
+          className="services-grid"
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
           {servicesData.map((service, index) => (
-            <div className="service-card" key={index}>
+            <motion.div 
+              className="service-card"
+              key={index}
+              variants={fadeInUp}
+              whileHover={{ scale: 1.05 }}
+            >
               <h3>{service.title}</h3>
               <p>{service.description}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

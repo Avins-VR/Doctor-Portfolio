@@ -1,102 +1,149 @@
 import React from 'react';
-import medicalGif from './assets/medical.gif'
-import doctorImage from './assets/doctor.png'
-import experienceImage from './assets/Experience.jpg'
-import Contact from './Contact'
-import Appointment from './Appointment'
-import Service from './Service'
+import { motion } from 'framer-motion';
+import doctorImage from './assets/doctor.png';
+import About from './About';
+import Service from './Service';
+import Appointment from './Appointment';
+import Contact from './Contact';
 
+const fadeInUp = {
+  initial: { opacity: 0, y: 60 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: "easeOut" },
+};
+
+const fadeInLeft = {
+  initial: { opacity: 0, x: -60 },
+  animate: { opacity: 1, x: 0 },
+  transition: { duration: 0.6, ease: "easeOut" },
+};
+
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
 
 function Home() {
   return (
-    <div className="home-container" >
-      <nav className="navbar">
-        <h1 className="logo">Dr. Arvind Menon</h1>
-        <ul className="nav-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#service">Services</a></li>
-          <li><a href="#appointment">Appointment</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+    <div className="home-container">
+      <motion.nav 
+        className="navbar"
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <motion.h1 
+          className="logo"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Dr. Arvind Menon
+        </motion.h1>
+        <motion.ul 
+          className="nav-links"
+          variants={staggerContainer}
+          initial="initial"
+          animate="animate"
+        >
+          {['Home', 'About', 'Services', 'Appointment', 'Contact'].map((item, index) => (
+            <motion.li
+              key={item}
+              variants={fadeInUp}
+              transition={{ delay: 0.1 * index }}
+            >
+              <a href={item === 'Home' ? '#' : `#${item.toLowerCase()}`}>{item}</a>
+            </motion.li>
+          ))}
+        </motion.ul>
+      </motion.nav>
+
+      {/* Hero Section */}
       <div className="hero-section">
-        <div className="hero-overlay"></div>
-        <div className="hero-content">
-          <h2>A decade of experience as a <span>Cardiologist</span></h2>
-          <h3>Experience best-in-class heart care, diagnosis & personalized treatment plans</h3>
-          <p>I am dedicated to improving patient outcomes through advanced treatments, compassionate care, clear communication, and a patient-first approach for your heart health and well-being.</p>
+        <motion.div 
+          className="hero-content"
+          variants={staggerContainer}
+          initial="initial"
+          animate="animate"
+        >
+          <motion.h2 variants={fadeInLeft} transition={{ delay: 0.3 }}>
+            <span className="wave">👋</span> Hi, I'm<br />
+            <span className="gradient-text">Dr. Arvind Menon</span>
+          </motion.h2>
+          <motion.h3 variants={fadeInLeft} transition={{ delay: 0.5 }}>
+            Cardiologist | Heart Care Specialist
+          </motion.h3>
+          <motion.p variants={fadeInLeft} transition={{ delay: 0.7 }}>
+            I am dedicated to improving patient outcomes through advanced treatments, compassionate care, clear communication, and a patient-first approach for your heart health and well-being.
+          </motion.p>
+        </motion.div>
+
+        <div className="doctor-visual">
+          <motion.img 
+            src={doctorImage} 
+            alt="Dr. Arvind Menon" 
+            className="doctor-image"
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            whileHover={{ scale: 1.05 }} 
+          />
+         <div className="image-animations">
+  {Array.from({ length: 10 }).map((_, i) => (
+    <div key={`circle-${i}`} className="shape circle"
+      style={{
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 0}s`,
+        animationDuration: `${5 + Math.random() * 5}s`
+      }}
+    ></div>
+  ))}
+
+  {Array.from({ length: 6 }).map((_, i) => (
+    <div key={`square-${i}`} className="shape square"
+      style={{
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 0}s`,
+        animationDuration: `${5 + Math.random() * 5}s`
+      }}
+    ></div>
+  ))}
+
+  {Array.from({ length: 6 }).map((_, i) => (
+    <div key={`triangle-${i}`} className="shape triangle"
+      style={{
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 0}s`,
+        animationDuration: `${5 + Math.random() * 5}s`
+      }}
+    ></div>
+  ))}
+</div>
         </div>
-        <img src={medicalGif} alt="Medical Animation" className="medical-gif" />
-        <img src={doctorImage} alt="Dr. Arvind Menon" className="doctor-image" />
-      </div>
-      <div className="about-section">
-        <h2 id="about">About Me</h2>
-        <h3>Dr. Arvind Menon, MBBS, MD, DM (Cardiology)</h3>
-        <p>Dr. Arvind Menon is a distinguished Cardiologist with over 20 years of extensive experience in diagnosing, managing, and treating a wide range of cardiovascular diseases. His career is marked by an unwavering commitment to excellence in patient care, blending advanced medical knowledge with a compassionate and personalized approach that has transformed countless lives.
-
-Throughout his journey, Dr. Menon has mastered the latest techniques in interventional cardiology, preventive heart care, and chronic disease management. He believes in empowering patients through education and clear communication, ensuring they fully understand their condition and treatment options. His philosophy centers on treating not just the disease but the person behind it, recognizing that each patient’s journey is unique.
-
-Dr. Menon has been instrumental in performing thousands of successful cardiac procedures — from simple angioplasties to complex interventions — earning the trust, respect, and gratitude of patients and peers alike. He is continuously engaged in research and professional development to stay at the forefront of cardiology innovations, bringing the best global practices to his patients. His dedication to continuous learning ensures that his patients benefit from the most advanced and effective treatments available today.
-
-Beyond the operating room and consulting chamber, Dr. Menon is an active contributor to medical conferences and peer-reviewed journals. He frequently shares his expertise as a guest speaker at national and international cardiology forums and plays a pivotal role in mentoring the next generation of cardiologists. His work has earned him numerous accolades for excellence in cardiac care and contributions to the field.
-
-Patients appreciate Dr. Menon not just for his technical expertise but also for his warm, approachable nature and genuine care. He builds lasting relationships based on trust, open dialogue, and mutual respect, taking time to listen and respond to every concern. His holistic approach extends to guiding patients on lifestyle modifications, preventive measures, and long-term wellness strategies that support healthier living.
-
-Outside his practice, Dr. Menon is an advocate for heart health awareness in the community. He organizes regular outreach programs, workshops, and health camps to educate people about early detection, risk factor management, and the importance of a heart-healthy lifestyle. His commitment to patient education and community well-being reflects his belief that prevention is as important as cure.
-
-With Dr. Arvind Menon, patients receive more than just world-class medical expertise — they find a trusted partner who walks with them on their journey to better heart health. His mission is to deliver comprehensive, compassionate cardiac care that empowers every patient to live life to its fullest, with a healthy heart and peace of mind.
-
-</p>
       </div>
 
-      {/* EXPERIENCE */}
-      <div className="experience-section">
-        <div className="experience-overlay"></div>
-        <div className="experience-content">
-          <div className="experience-item">
-            <i className="bi bi-heart-pulse"></i>
-            <p className="count">1700</p>
-            <p>Surgeries</p>
-          </div>
-          <div className="experience-item">
-            <i className="bi bi-people-fill"></i>
-            <p className="count">50000</p>
-            <p>Cases</p>
-          </div>
-          <div className="experience-item">
-            <i className="bi bi-globe-central-south-asia"></i>
-            <p className="count">5</p>
-            <p>Countries</p>
-          </div>
-        </div>
-      </div>
-      <div className="expertise-section">
-        <h2>Areas of Expertise</h2>
-        <p>Over 20 years of extensive practice and global exposure have made Dr. Arvind Menon a trusted choice for comprehensive cardiac care</p>
-        <ul>
-          <li>Advanced diagnosis & management of complex heart diseases</li>
-          <li>Coronary angiography & angioplasty (stent placement)</li>
-          <li>Preventive cardiology & risk factor management</li>
-          <li>Heart failure management & long-term care</li>
-          <li>Treatment of arrhythmias & pacemaker implantation</li>
-          <li>Minimally invasive cardiac procedures</li>
-          <li>Non-invasive cardiac imaging & stress tests</li>
-          <li>Hypertension & cholesterol management</li>
-          <li>Lifestyle counselling for heart health</li>
-          <li>Patient education & rehabilitation programs</li>
-        </ul>
-      </div>
-      <div>
-        <Service/>
-        <Appointment/>
-        <Contact/>
-         <footer className="footer">
-          <p>© 2025 Dr. Arvind Menon. All rights reserved.</p>
-        </footer>
-      </div>
+      <About/>
+      <Service/>
+      <Appointment/>
+      <Contact/>
+
+      <motion.footer 
+        className="footer"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <p>© 2025 Dr. Arvind Menon. All rights reserved.</p>
+      </motion.footer>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
